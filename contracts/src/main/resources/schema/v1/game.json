@@ -1,0 +1,40 @@
+{
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Game",
+    "description": "Body for a single game",
+    "properties": {
+        "date": {
+            "description": "Date and time of the game.  Includes timezone",
+            "type": "string"
+        },
+        "rink": {
+            "description": "The rink the game will be played at",
+            "type": "string"
+        },
+        "sheet": {
+            "description": "The sheet within the rink the game will be played on",
+            "type": "string"
+        },
+        "home_team": {
+            "description": "Name of the home team",
+            "type": "string"
+        },
+        "away_team": {
+            "description": "Name of the away team",
+            "type": "string"
+        },
+        "game_number": {
+            "description": "This is an optional field.  Playoff elimination games idetify teams playing by the previous game number",
+            "type": "integer"
+        }
+    },
+
+  "required": [
+    "date",
+    "rink",
+    "sheet",
+    "home_team",
+    "away_team"
+  ]
+}

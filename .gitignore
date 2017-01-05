@@ -8,7 +8,8 @@ target/
 .project
 .settings
 .springBeans
-
+.gitignore
+.env
 ### IntelliJ IDEA ###
 .idea
 *.iws

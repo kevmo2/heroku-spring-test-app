@@ -1,0 +1,29 @@
+{
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Schedule",
+    "description": "Body for a schedule",
+    "properties": {
+        "season": {
+            "description": "name of the season the schedule is for",
+            "type": "string"
+        },
+        "league": {
+            "description": "The league the schedule is for",
+            "type": "string"
+        },
+        "games": {
+            "type": "array",
+            "description": "list of games",
+            "items": {
+                "$ref": "game.json"
+            }
+        }
+    },
+
+    "required": [
+        "season",
+        "league",
+        "games"
+    ]
+}

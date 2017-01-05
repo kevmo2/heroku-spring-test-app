@@ -1,0 +1,23 @@
+{
+    "season": "Winter 2016",
+    "league": "Ice Pack Hockey",
+    "games": [
+                {
+                    "date": "22-Sep-16 10:10PM EST",
+                    "rink": "Rockville",
+                    "sheet": "Rink 3",
+                    "start": "",
+                    "team 1": "Blowholes",
+                    "team 2": "Ice Turtles",
+                    "game number": "1"
+                }, {
+                    "date": "29-Sep-16",
+                    "rink": "Rockville",
+                    "sheet": "Rink 3",
+                    "start": "10:10 PM",
+                    "team 1": "Blowholes",
+                    "team 2": "Collision Experts",
+                    "game number": "2"
+                }
+        ]
+}
