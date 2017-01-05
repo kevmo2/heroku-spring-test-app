@@ -34,7 +34,13 @@ public class GetTeamsController {
         context = new ProcessorContext();
         ContextHelper.setTeamName(context, teamName);
         getTeamWorkflow.process(context);
-        return ContextHelper.getTeamEntity(context);
+        if (ContextHelper.getTeamEntity(context) == null) {
+            TeamEntity shitEntity = new TeamEntity();
+            shitEntity.setTeamName("shit");
+            return shitEntity;
+        } else {
+           return ContextHelper.getTeamEntity(context);
+        }
 
     }
 
