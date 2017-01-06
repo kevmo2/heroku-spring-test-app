@@ -1,6 +1,6 @@
 package industries.kvmo.services.workflow;
 
-import industries.kvmo.services.helpers.AbstractWorkflow;
+import industries.kvmo.services.helpers.AbstractSequence;
 import industries.kvmo.services.processors.GetTeamsProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class GetTeamsWorkflow extends AbstractWorkflow{
+public class GetTeamsSequence extends AbstractSequence {
 
     @Autowired
     private GetTeamsProcessor getTeamsProcessor;

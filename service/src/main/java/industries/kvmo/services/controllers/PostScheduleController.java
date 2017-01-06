@@ -1,7 +1,7 @@
 package industries.kvmo.services.controllers;
 
-import industries.kvmo.services.helpers.ProcessorContext;
-import industries.kvmo.services.workflow.AddScheduleWorkflow;
+import industries.kvmo.services.helpers.CommandSequenceState;
+import industries.kvmo.services.workflow.AddScheduleSequence;
 import industries.kvmo.v1.Schedule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class PostScheduleController {
 
     @Autowired
-    private AddScheduleWorkflow workflow;
+    private AddScheduleSequence workflow;
 
     @RequestMapping(method = RequestMethod.POST)
     public void post(@RequestBody Schedule requestSchedule ) {
-        ProcessorContext context = new ProcessorContext();
+        CommandSequenceState context = new CommandSequenceState();
         context.set("REQUST_SCHEDULE", requestSchedule);
         if (didWorkflowFail(context)) {
             throw new RuntimeException("Oh shit!");
@@ -29,7 +29,7 @@ public class PostScheduleController {
 
     }
 
-    private boolean didWorkflowFail(ProcessorContext context) {
+    private boolean didWorkflowFail(CommandSequenceState context) {
         return !workflow.process(context);
     }
 }

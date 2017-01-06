@@ -7,13 +7,13 @@ import java.util.List;
 /**
  * Abstract class for a SERIAL workflow industries
  */
-public abstract class AbstractWorkflow {
+public abstract class AbstractSequence {
 
-    private List<ProcessorInterface> processorList;
+    private List<Command> processorList;
 
-    public boolean process(ProcessorContext context) {
-        for (ProcessorInterface processor : processorList ) {
-            if (!processor.process(context)) {
+    public boolean process(CommandSequenceState context) {
+        for (Command processor : processorList ) {
+            if (!processor.execute(context)) {
                 return false;
             }
         }
@@ -22,11 +22,11 @@ public abstract class AbstractWorkflow {
 
     public abstract void createWorkflow();
 
-    public AbstractWorkflow() {
+    public AbstractSequence() {
         processorList = new ArrayList<>();
     }
 
-    public List<ProcessorInterface> getProcessorList() {
+    public List<Command> getProcessorList() {
         return processorList;
     }
 

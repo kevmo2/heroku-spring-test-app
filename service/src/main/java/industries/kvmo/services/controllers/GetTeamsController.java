@@ -1,15 +1,14 @@
 package industries.kvmo.services.controllers;
 
 import industries.kvmo.model.TeamEntity;
-import industries.kvmo.services.helpers.ContextHelper;
-import industries.kvmo.services.helpers.ProcessorContext;
-import industries.kvmo.services.workflow.GetTeamWorkflow;
-import industries.kvmo.services.workflow.GetTeamsWorkflow;
+import industries.kvmo.services.helpers.StateHelper;
+import industries.kvmo.services.helpers.CommandSequenceState;
+import industries.kvmo.services.workflow.GetTeamSequence;
+import industries.kvmo.services.workflow.GetTeamsSequence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,43 +19,30 @@ import java.util.List;
 @RestController
 public class GetTeamsController {
 
-    private ProcessorContext context;
+    private CommandSequenceState context;
 
     @Autowired
-    private GetTeamWorkflow getTeamWorkflow;
+    private GetTeamSequence getTeamWorkflow;
 
     @Autowired
-    private GetTeamsWorkflow getTeamsWorkflow;
+    private GetTeamsSequence getTeamsWorkflow;
 
-    @RequestMapping(method = RequestMethod.GET, path = "/teams/{teamName}/info")
+    @RequestMapping(method = RequestMethod.GET, path = "/teams/{teamName}")
     public TeamEntity getTeam(@PathVariable String teamName) {
 
-        context = new ProcessorContext();
-        ContextHelper.setTeamName(context, teamName);
+        context = new CommandSequenceState();
+        StateHelper.setTeamName(context, teamName);
         getTeamWorkflow.process(context);
-        if (ContextHelper.getTeamEntity(context) == null) {
-            TeamEntity shitEntity = new TeamEntity();
-            shitEntity.setTeamName("shit");
-            return shitEntity;
-        } else {
-           return ContextHelper.getTeamEntity(context);
-        }
+        return StateHelper.getTeamEntity(context);
 
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/teams/")
+    @RequestMapping(method = RequestMethod.GET, path = "/teams")
     public List<TeamEntity> getTeams() {
-        context = new ProcessorContext();
+        context = new CommandSequenceState();
         getTeamsWorkflow.process(context);
-        return ContextHelper.getTeamEntities(context);
+        return StateHelper.getTeamEntities(context);
 
     }
-
-    @RequestMapping("/")
-    @ResponseBody
-    String home() {
-        return "Hello World!";
-    }
-
 
 }
